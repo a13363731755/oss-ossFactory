@@ -1,7 +1,7 @@
 {
     "name": "rsp/oss-factory",
     "description": "the oss-factory is a aliyun/oss collection package",
-    "type": "composer-plugin",
+    "type": "library",
     "require": {
         "aliyuncs/oss-sdk-php": "^2.3"
     },
