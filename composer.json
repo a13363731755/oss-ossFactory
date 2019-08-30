@@ -15,7 +15,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "V1.1"
+            "dev-develop": "V1.1-dev"
         },
         "laravel": {
             "providers": [
