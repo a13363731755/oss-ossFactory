@@ -10,7 +10,7 @@ class OssServiceProvider extends ServiceProvider
     {
         //发布配置文件到项目的 config 目录中
         $this->publishes([
-            __DIR__ . '/config/oss-config.php' => config_path('oss-config.php'),
+            __DIR__ . '/../config/oss-config.php' => config_path('oss-config.php'),
         ]);
     }
 

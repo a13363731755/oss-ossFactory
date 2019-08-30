@@ -1,7 +1,6 @@
 # oss-ossFactory
 the oss-factory is a aliyun/oss collection package
 
-# Alibaba Cloud OSS SDK for PHP
 
 [![Latest Stable Version](https://poser.pugx.org/aliyuncs/oss-sdk-php/v/stable)](https://packagist.org/packages/aliyuncs/oss-sdk-php)
 [![Build Status](https://travis-ci.org/aliyun/aliyun-oss-php-sdk.svg?branch=master)](https://travis-ci.org/aliyun/aliyun-oss-php-sdk)
@@ -15,37 +14,39 @@ Alibaba Cloud Object Storage Service (OSS) is a cloud storage service provided b
 
 
 ## Run environment
-- PHP 5.3+.
+- PHP 7.1+.
 - cURL extension.
 
 Tips:
 
-- In Ubuntu, you can use the ***apt-get*** package manager to install the *PHP cURL extension*: `sudo apt-get install php5-curl`.
+- In Ubuntu, you can use the ***apt-get*** package manager to install the *PHP cURL extension*: `sudo apt-get install php7-curl`.
 
 ## Install OSS PHP SDK
 
 - If you use the ***composer*** to manage project dependencies, run the following command in your project's root directory:
 
-        composer require aliyuncs/oss-sdk-php
+        composer require rsp/oss-factory
 
    You can also declare the dependency on Alibaba Cloud OSS SDK for PHP in the `composer.json` file.
 
         "require": {
-            "aliyuncs/oss-sdk-php": "~2.0"
+            "rsp/oss-factory": "V1.2.1"
         }
+        
+    Finally, you will want to publish the config using the following command:
+    
+    Laravel 4:
+    
+        $ php artisan config:publish rsp/oss-factory
+            
+    Laravel 5:
 
-   Then run `composer install` to install the dependency. After the Composer Dependency Manager is installed, import the dependency in your PHP code: 
+        $ php artisan vendor:publish --provider="AliOss\OssFactory\Src\OssServiceProvider"
+    
+    
 
-        require_once __DIR__ . '/vendor/autoload.php';
 
-- You can also directly download the packaged [PHAR File][releases-page], and 
-   introduce the file to your code: 
 
-        require_once '/path/to/oss-sdk-php.phar';
-
-- Download the SDK source code, and introduce the `autoload.php` file under the SDK directory to your code: 
-
-        require_once '/path/to/oss-sdk/autoload.php';
 
 ## Quick use
 
@@ -53,8 +54,8 @@ Tips:
 
 | Class | Explanation |
 |:------------------|:------------------------------------|
-|OSS\OSSClient | OSS client class. An OSSClient instance can be used to call the interface.  |
-|OSS\Core\OSSException |OSS Exception class . You only need to pay attention to this exception when you use the OSSClient. |
+|AliOss\OssFactory\Src\OssService | OSS client class. An OSSClient instance can be used to call the interface.  |
+|Src\Exceptions\ServerDisposeException |OSS Exception class . You only need to pay attention to this exception when you use the OSSClient. |
 
 ### Initialize an OSSClient
 
@@ -70,72 +71,19 @@ try {
 } catch (OssException $e) {
     print $e->getMessage();
 }
+
+
+or...
+
+$file = public_path('test.png');
+dd(OssFace::config([])->upload($file));
 ```
 
 ### Operations on objects
 
 Objects are the most basic data units on the OSS. You can simply consider objects as files. The following code uploads an object:
 
-```php
-<?php
-$bucket= "<Name of the bucket in use. Pay attention to naming conventions>";
-$object = "<Name of the object in use. Pay attention to naming conventions>";
-$content = "Hello, OSS!"; // Content of the uploaded file
-try {
-    $ossClient->putObject($bucket, $object, $content);
-} catch (OssException $e) {
-    print $e->getMessage();
-}
-```
 
-### Operations on buckets
-
-Buckets are the space that you use to manage the stored objects. It is an object management unit for users. Each object must belong to a bucket. You can create a bucket with the following code:
-
-```php
-<?php
-$bucket= "<Name of the bucket in use. Pay attention to naming conventions>";
-try {
-    $ossClient->createBucket($bucket);
-} catch (OssException $e) {
-    print $e->getMessage();
-}
-```
-
-### Handle returned results
-
-The OSSClient provides the following two types of returned data from interfaces:
-
-- Put and Delete interfaces: The *PUT* and *DELETE* operations are deemed successful if *null* is returned by the interfaces without *OSSException*.
-- Get and List interfaces: The *GET* and *LIST* operations are deemed successful if the desired data is returned by the interfaces without *OSSException*. For example, 
-
-    ```php
-    <?php
-    $bucketListInfo = $ossClient->listBuckets();
-    $bucketList = $bucketListInfo->getBucketList();
-    foreach($bucketList as $bucket) {
-        print($bucket->getLocation() . "\t" . $bucket->getName() . "\t" . $bucket->getCreatedate() . "\n");
-    }
-    ```
-In the above code, $bucketListInfo falls into the 'OSS\Model\BucketListInfo' data type.
-
-
-### Run a sample project
-
-- Modify `samples/Config.php` to complete the configuration information. 
-- Run `cd samples/ && php RunAll.php`. 
-
-### Run a unit test
-
-- Run `composer install` to download the dependent libraries. 
-- Set the environment variable. 
-
-        export OSS_ACCESS_KEY_ID=access-key-id
-        export OSS_ACCESS_KEY_SECRET=access-key-secret
-        export OSS_ENDPOINT=endpoint
-        export OSS_BUCKET=bucket-name
-
-- Run `php vendor/bin/phpunit`
 
 ## License
 
