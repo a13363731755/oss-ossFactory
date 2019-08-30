@@ -19,10 +19,10 @@ class OssService implements OssServiceInterface
     public function config($config = [])
     {
         if (empty($config['accessKeyId']) || empty($config['accessKeySecret']) || empty($config['bucket']) || empty($config['endpoint'])) {
-            $config['accessKeyId'] = config('oss.AccessKeyID');
-            $config['accessKeySecret'] = config('oss.AXDKKReJDiWQcx2WvUok3EjUOGIgKK');
-            $config['bucket'] = config('oss.bucket');
-            $config['endpoint'] = config('oss.endpoint');
+            $config['accessKeyId'] = config('oss-config.Aliyun.AccessKeyID');
+            $config['accessKeySecret'] = config('oss-config.Aliyun.AXDKKReJDiWQcx2WvUok3EjUOGIgKK');
+            $config['bucket'] = config('oss-config.Aliyun.bucket');
+            $config['endpoint'] = config('oss-config.Aliyun.endpoint');
         }
         $this->config = $config;
         return $this;
@@ -54,7 +54,7 @@ class OssService implements OssServiceInterface
             throw new ServerDisposeException('service dones not exists' . $service);
         }
         try {
-            $res = $this->config()->getHttpClient()->uploadFile($this->config['bucket'], $this->getFileName($file), $file);
+            $res = $this->getHttpClient()->uploadFile($this->config['bucket'], $this->getFileName($file), $file);
             return $res['oss-request-url'];
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);

@@ -16,7 +16,7 @@ class OssServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(OssService::class, function () {
+        $this->app->singleton('OssServer', function () {
             return new OssService();
         });
     }

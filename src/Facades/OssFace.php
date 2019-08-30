@@ -20,6 +20,6 @@ class OssFace extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return OssService::class;
+        return 'OssServer';
     }
 }
