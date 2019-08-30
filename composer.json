@@ -15,14 +15,14 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "1.0-dev"
+            "dev-develop": "V1.1"
         },
         "laravel": {
             "providers": [
-                "Oss\\OssFactory\\Src\\OssServiceProvider"
+                "AliOss\\OssFactory\\Src\\OssServiceProvider"
             ],
             "aliases": {
-                "Oss": "Oss\\OssFactory\\Src\\Facades\\OssFace"
+                "OssFace": "AliOss\\OssFactory\\Src\\Facades\\OssFace"
             }
         }
     },
