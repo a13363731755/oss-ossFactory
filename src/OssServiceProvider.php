@@ -1,6 +1,6 @@
 <?php
 
-namespace Oss\OssFactory;
+namespace AliOss\OssFactory\Src;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -10,14 +10,14 @@ class OssServiceProvider extends ServiceProvider
     {
         //发布配置文件到项目的 config 目录中
         $this->publishes([
-            __DIR__ . '/config/oss.php' => config_path('oss.php'),
+            __DIR__ . '/config/oss-config.php' => config_path('oss-config.php'),
         ]);
     }
 
     public function register()
     {
-        $this->app->singleton(Oss::class, function () {
-            return new Oss();
+        $this->app->singleton(OssService::class, function () {
+            return new OssService();
         });
     }
 }

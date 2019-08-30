@@ -1,8 +1,8 @@
 <?php
 
-namespace Oss\OssFactory\src;
+namespace AliOss\OssFactory\src;
 
-interface OssInterface {
+interface OssServiceInterface {
 
     public function config(array $config = []);
 

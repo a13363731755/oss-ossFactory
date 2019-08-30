@@ -19,10 +19,10 @@
         },
         "laravel": {
             "providers": [
-                "Oss\\OssFactory\\ServiceProvider"
+                "Oss\\OssFactory\\Src\\OssServiceProvider"
             ],
             "aliases": {
-                "Oss": "Oss\\OssFactory\\Facades\\Oss"
+                "Oss": "Oss\\OssFactory\\Src\\Facades\\OssFace"
             }
         }
     },
