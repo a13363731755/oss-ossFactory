@@ -3,7 +3,7 @@
     "description": "the oss-factory is a aliyun/oss collection package",
     "type": "library",
     "require": {
-
+        "aliyuncs/oss-sdk-php": "^2.3"
     },
     "require-dev": {
         "php": ">=7.1"
