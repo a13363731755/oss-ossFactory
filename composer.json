@@ -1,0 +1,33 @@
+{
+    "name": "rsp/oss-factory",
+    "description": "the oss-factory is a aliyun/oss collection package",
+    "type": "composer-plugin",
+    "require": {
+        "aliyuncs/oss-sdk-php": "^2.3"
+    },
+    "require-dev": {
+        "php": ">=7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oss\\OssFactory\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oss\\OssFactory\\ServiceProvider"
+            ],
+            "aliases": {
+                "Oss": "Oss\\OssFactory\\Facades\\Oss"
+            }
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "任少鹏",
+            "email": "ren.shaopeng@genecast.com.cn"
+        }
+    ]
+}
