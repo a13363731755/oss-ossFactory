@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Oss\\OssFactory\\": "src/"
+            "AliOss\\OssFactory\\Src\\": "src/"
         }
     },
     "extra": {
@@ -32,5 +32,6 @@
             "name": "任少鹏",
             "email": "ren.shaopeng@genecast.com.cn"
         }
-    ]
+    ],
+    "minimum-stability": "dev"
 }

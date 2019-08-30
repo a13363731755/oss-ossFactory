@@ -1,5 +1,5 @@
 <?php
-namespace AliOss\OssFactory\Src\Exception;
+namespace AliOss\OssFactory\Src\Exceptions;
 
 class Exception extends \Exception
 {

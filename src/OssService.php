@@ -3,8 +3,8 @@
 namespace AliOss\OssFactory\Src;
 
 use OSS\OssClient;
-use AliOss\OssFactory\Src\Exception\InvalidParamException;
-use AliOss\OssFactory\Src\Exception\ServerDisposeException;
+use AliOss\OssFactory\Src\Exceptions\InvalidParamException;
+use AliOss\OssFactory\Src\Exceptions\ServerDisposeException;
 
 class OssService implements OssServiceInterface
 {
@@ -16,7 +16,7 @@ class OssService implements OssServiceInterface
      * @param array $config
      * @return $this
      */
-    public function config(array $config = [])
+    public function config($config = [])
     {
         if (empty($config['accessKeyId']) || empty($config['accessKeySecret']) || empty($config['bucket']) || empty($config['endpoint'])) {
             $config['accessKeyId'] = config('oss.AccessKeyID');
@@ -45,7 +45,7 @@ class OssService implements OssServiceInterface
      * @throws InvalidParamException
      * @throws ServerDisposeException
      */
-    public function upload(string $file, string $service='oss'): string
+    public function upload($file, $service='oss')
     {
         if (!is_string($file) || !is_file($file)) {
             throw new InvalidParamException('invalid file param');
@@ -54,7 +54,7 @@ class OssService implements OssServiceInterface
             throw new ServerDisposeException('service dones not exists' . $service);
         }
         try {
-            $res = $this->getHttpClient()->uploadFile($this->config['bucket'], $this->getFileName($file), $file);
+            $res = $this->config()->getHttpClient()->uploadFile($this->config['bucket'], $this->getFileName($file), $file);
             return $res['oss-request-url'];
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
@@ -66,13 +66,13 @@ class OssService implements OssServiceInterface
      * @param string $file
      * @return string
      */
-    public function getFileName(string $file): string
+    public function getFileName($file)
     {
         $extension = substr($file, strrpos($file, '.'));
         return md5($file) . time() . $extension;
     }
 
-    public function download(string $file)
+    public function download($file)
     {
         
     }
