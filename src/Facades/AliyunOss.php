@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Facade;
  * LaravelExcel Facade
  *
  * @category   Laravel Oss
- * @version    1.0.0
+ * @version    1.2.2
  * @package    oss/ossFactory
  */
-class OssFace extends Facade {
+class AliyunOss extends Facade {
 
     /**
      * Return facade accessor
@@ -19,6 +19,6 @@ class OssFace extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return 'OssServer';
+        return 'AliyunOssServer';
     }
 }

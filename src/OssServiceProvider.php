@@ -17,7 +17,10 @@ class OssServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('OssServer', function () {
-            return new OssService();
+            return new Factory();
+        });
+        $this->app->bind('AliyunOssServer', function () {
+            return new AliyunOssService();
         });
     }
 }

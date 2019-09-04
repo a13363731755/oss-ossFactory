@@ -6,7 +6,7 @@ use OSS\OssClient;
 use AliOss\OssFactory\Src\Exceptions\InvalidParamException;
 use AliOss\OssFactory\Src\Exceptions\ServerDisposeException;
 
-class OssService implements OssServiceInterface
+class QiniuOssService implements OssServiceInterface
 {
 
     protected $config;
@@ -20,7 +20,7 @@ class OssService implements OssServiceInterface
     {
         if (empty($config['accessKeyId']) || empty($config['accessKeySecret']) || empty($config['bucket']) || empty($config['endpoint'])) {
             $config['accessKeyId'] = config('oss-config.Aliyun.AccessKeyID');
-            $config['accessKeySecret'] = config('oss-config.Aliyun.AXDKKReJDiWQcx2WvUok3EjUOGIgKK');
+            $config['accessKeySecret'] = config('oss-config.Aliyun.AccessKeySecret');
             $config['bucket'] = config('oss-config.Aliyun.bucket');
             $config['endpoint'] = config('oss-config.Aliyun.endpoint');
         }
@@ -54,7 +54,7 @@ class OssService implements OssServiceInterface
             throw new ServerDisposeException('service dones not exists' . $service);
         }
         try {
-            $res = $this->getHttpClient()->uploadFile($this->config['bucket'], $this->getFileName($file), $file);
+            $res = $this->config()->getHttpClient()->uploadFile($this->config['bucket'], $this->getFileName($file), $file);
             return $res['oss-request-url'];
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);

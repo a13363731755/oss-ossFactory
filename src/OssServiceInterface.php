@@ -6,8 +6,8 @@ interface OssServiceInterface {
 
     public function config($config = []);
 
-    public function upload($file);
+    public function upload($file, $fileName = '');
 
-    public function download($file);
+    public function download($file, $path, $type = 0);
 
 }
